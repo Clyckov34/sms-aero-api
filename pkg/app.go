@@ -15,7 +15,7 @@ func Run(dictPhone map[string]string) {
 	}
 
 	for phone, name := range dictPhone {
-		go SMS.request(phone, SMS.writeMessage(name))
+		go SMS.request(phone, writeMessage(name))
 	}
 
 	fmt.Println(SMS.readStatus())

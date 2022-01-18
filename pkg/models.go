@@ -33,6 +33,6 @@ func (m *Account) readStatus() (message string) {
 
 //writeMessage текст SMS для Абонента
 //	 name - Имя абонента
-func (m *Account) writeMessage(name string) (message string) {
+func writeMessage(name string) (message string) {
 	return fmt.Sprintf("Привет %v. Меня зовут Клыков Денис, если Вы получили это сообщения, пожалуйста дайте знать об этом. Пишу программу для отправки SMS... Спасибо большое!!!", name)
 }
