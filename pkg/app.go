@@ -5,6 +5,8 @@ import (
 	"net/http"
 )
 
+//Run запуск приложения SMS Aero
+//	dictPhone - словарь Образец map[НОМЕР]=ИМЯ
 func Run(dictPhone map[string]string) {
 	var SMS = &Account{
 		Email: "...", // Логин учетной записи
@@ -13,8 +15,8 @@ func Run(dictPhone map[string]string) {
 	}
 
 	for phone, name := range dictPhone {
-		go SMS.request(phone, SMS.messageSMS(name))
+		go SMS.request(phone, SMS.writeMessage(name))
 	}
 
-	fmt.Println(SMS.writeStatus())
+	fmt.Println(SMS.readStatus())
 }

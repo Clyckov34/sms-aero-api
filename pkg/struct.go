@@ -4,7 +4,7 @@ import "net/http"
 
 type SMSAero interface {
 	request(phone, message string)
-	writeStatus() (message string)
+	readStatus() (message string)
 }
 
 //Account структура

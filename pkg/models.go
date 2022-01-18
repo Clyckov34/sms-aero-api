@@ -25,14 +25,14 @@ func (m *Account) request(phone, message string) {
 	m.Chan <- req
 }
 
-//writeStatus вывод в терминал о статусе запроса
-func (m *Account) writeStatus() (message string) {
+//readStatus вывод в терминал о статусе запроса
+func (m *Account) readStatus() (message string) {
 	res := <-m.Chan
 	return fmt.Sprintf("HTTP Status: %v", res.Status)
 }
 
 //writeMessage текст SMS для Абонента
 //	 name - Имя абонента
-func (m *Account) messageSMS(name string) (message string) {
+func (m *Account) writeMessage(name string) (message string) {
 	return fmt.Sprintf("Привет %v. Меня зовут Клыков Денис, если Вы получили это сообщения, пожалуйста дайте знать об этом. Пишу программу для отправки SMS... Спасибо большое!!!", name)
 }
