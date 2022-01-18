@@ -7,21 +7,22 @@ import (
 	"net/url"
 )
 
-//SMSAero
 type SMSAero interface {
-	request(phone, message string) (resp *http.Response, err error)
+	request(phone, message string)
+	writeStatus() (message string)
 }
 
 //Account структура
 type Account struct {
 	Email string
 	Token string
+	Chan  chan *http.Response
 }
 
 //request запрос API SMS Aero
 //	phone - Номер телефона
 //	message - Текст сообщения
-func (m *Account) request(phone, message string) (resp *http.Response, err error) {
+func (m *Account) request(phone, message string) {
 	value := url.Values{
 		"number": {phone},
 		"text":   {message},
@@ -30,10 +31,16 @@ func (m *Account) request(phone, message string) (resp *http.Response, err error
 
 	req, err := http.PostForm("https://"+m.Email+":"+m.Token+"@gate.smsaero.ru/v2/sms/send", value)
 	if err != nil || req.StatusCode != 200 {
-		return nil, fmt.Errorf("ошибка запроса: %v - %v", req.StatusCode, err)
+		log.Fatalf("ошибка запроса: %v", req.Status)
 	}
 
-	return req, nil
+	m.Chan <- req
+}
+
+//writeStatus вывод на экран
+func (m *Account) writeStatus() (message string) {
+	res := <-m.Chan
+	return fmt.Sprintf("HTTP Status: %v", res.Status)
 }
 
 /*
@@ -41,15 +48,17 @@ func (m *Account) request(phone, message string) (resp *http.Response, err error
 	Отправка SMS по телефону
 */
 func main() {
-	var SMS SMSAero = &Account{
-		Email: "...", // Логин учетной записи
-		Token: "...", // Токен учетной записи
+	var SMS = &Account{
+		Email: "clyckov.denis@yandex.ru",      // Логин учетной записи
+		Token: "UMEf1y7ojyjeV8YFBiCMUmETdaDb", // Токен учетной записи
+		Chan:  make(chan *http.Response),
 	}
 
-	resp, err := SMS.request("79963567212", "Привет! Меня зовут Денис")
-	if err != nil {
-		log.Fatalln(err)
+	arrayPhone := [4]string{"79963567212", "79044222171", "79033158691", "79047795408"}
+
+	for _, ph := range arrayPhone {
+		go SMS.request(ph, "Привет! Меня зовут Клыков Денис, если Вы получили это сообщения, пожалуйста дайте мне знать об этом. Пишу программу отправка SMS... Спасибо большое!!!")
 	}
 
-	fmt.Println("HTTP Status:", resp.StatusCode)
+	fmt.Println(SMS.writeStatus())
 }
