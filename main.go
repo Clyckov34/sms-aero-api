@@ -49,8 +49,8 @@ func (m *Account) writeStatus() (message string) {
 */
 func main() {
 	var SMS = &Account{
-		Email: "clyckov.denis@yandex.ru",      // Логин учетной записи
-		Token: "UMEf1y7ojyjeV8YFBiCMUmETdaDb", // Токен учетной записи
+		Email: "...", // Логин учетной записи
+		Token: "...", // Токен учетной записи
 		Chan:  make(chan *http.Response),
 	}
 
