@@ -9,8 +9,8 @@ import (
 //	dictPhone - словарь Образец map[НОМЕР]=ИМЯ
 func Run(dictPhone map[string]string) {
 	var SMS = &Account{
-		Email: "clyckov.denis2404@gmail.com", // Логин учетной записи
-		Token: "lgk2O1lnSBZLPVl83lxnitN7f8B", // Токен учетной записи
+		Email: "...", // Логин учетной записи
+		Token: "...", // Токен учетной записи
 		Chan:  make(chan *http.Response),
 	}
 
