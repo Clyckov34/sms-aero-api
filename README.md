@@ -1,3 +1,3 @@
-# SMS API
+# Commercial SMS messages 
 
-Отправка SMS на телефон... Образец кода. СМС Аэро https://smsaero.ru/api/
+Отправка SMS на телефон... Образец кода. SMS Aero https://smsaero.ru/api/
