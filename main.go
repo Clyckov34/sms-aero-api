@@ -12,6 +12,8 @@ func main() {
 	dictPhone["79044222171"] = "Андрей"
 	dictPhone["79033158691"] = "Сергей"
 	dictPhone["79047795408"] = "Даша"
+	dictPhone["79093781159"] = "Лена"
+	dictPhone["79996299940"] = "Маша"
 
 	pkg.Run(dictPhone)
 }
