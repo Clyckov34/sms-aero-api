@@ -1,6 +1,6 @@
 package main
 
-import "WWW/pkg"
+import "WWW/internal"
 
 /*
 	SMSAero API: https://smsaero.ru/api/
@@ -9,11 +9,10 @@ import "WWW/pkg"
 func main() {
 	dictPhone := make(map[string]string)
 	dictPhone["79963567212"] = "Денис"
-	dictPhone["79044222171"] = "Андрей"
-	dictPhone["79033158691"] = "Сергей"
-	dictPhone["79047795408"] = "Даша"
-	dictPhone["79093781159"] = "Лена"
 	dictPhone["79996299940"] = "Маша"
+	dictPhone["79996256594"] = "Света"
+	dictPhone["79610857087"] = "Дима"
+	dictPhone["79963568358"] = "Петя"
 
-	pkg.Run(dictPhone)
+	internal.Run(dictPhone)
 }
