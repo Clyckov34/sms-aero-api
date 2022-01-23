@@ -22,6 +22,8 @@ func (m *Account) request(phone, message string) {
 		log.Fatalf("ошибка запроса: %v", req.Status)
 	}
 
+	defer req.Body.Close()
+
 	m.Chan <- req
 }
 
