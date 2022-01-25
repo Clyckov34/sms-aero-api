@@ -1,15 +1,23 @@
 package internal
 
-import "net/http"
+import (
+	"sync"
+)
 
 type SMSAero interface {
 	request(phone, message string)
-	readStatus() (message string)
+	setting(number int)
+	wait()
 }
 
-//Account структура
-type Account struct {
+//Account данные пользователя
+type User struct {
 	Email string
 	Token string
-	Chan  chan *http.Response
+}
+
+//WaitGroup структура для группы горутин
+type WaitGroup struct {
+	Account User
+	Wg      sync.WaitGroup
 }
