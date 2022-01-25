@@ -2,13 +2,14 @@ package internal
 
 import (
 	"fmt"
+	"strconv"
 	"sync"
 )
 
 //Run запуск приложения SMS Aero
 //	dictPhone - словарь Образец map[НОМЕР]=ИМЯ
 //	user - данные пользователя по struct USER
-func Run(dictPhone map[string]string, user *User) {
+func Run(listPhone []int, user *User) {
 	var SMS = &WaitGroup{
 		Account: User{
 			Email: user.Email,  // Логин учетной записи
@@ -16,10 +17,10 @@ func Run(dictPhone map[string]string, user *User) {
 		Wg: sync.WaitGroup{},
 	}
 
-	SMS.setting(len(dictPhone))
+	SMS.setting(len(listPhone))
 
-	for phone, name := range dictPhone {
-		go SMS.request(phone, writeMessage(name))
+	for _, ph := range listPhone {
+		go SMS.request(strconv.Itoa(ph), writeMessage())
 	}
 
 	SMS.wait()
@@ -27,6 +28,6 @@ func Run(dictPhone map[string]string, user *User) {
 
 //writeMessage текст SMS для Абонента
 //	 name - Имя абонента
-func writeMessage(name string) (message string) {
-	return fmt.Sprintf("Привет %v. Меня зовут Клыков Денис, если Вы получили это сообщения, пожалуйста дайте знать об этом. Пишу программу для массовой отправки SMS... Спасибо большое!!!", name)
+func writeMessage() (message string) {
+	return fmt.Sprintln("Привет, SMS сообщения от SMS API")
 }

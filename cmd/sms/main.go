@@ -19,17 +19,12 @@ func init() {
 	Отправка SMS по телефону
 */
 func main() {
-	dictPhone := make(map[string]string)
-	dictPhone["79963567212"] = "Денис"
-	dictPhone["79996299940"] = "Маша"
-	dictPhone["79996256594"] = "Света"
-	dictPhone["79610857087"] = "Дима"
-	dictPhone["79963568358"] = "Петя"
+	listArray := []int{79963567212, 79996299940, 79996256594, 79610857087, 79963568358}
 
 	if len(os.Args) == 1 {
 		log.Fatalln("ошибка: Не указаны флаги")
 	} else {
 		flag.Parse()
-		internal.Run(dictPhone, &User)
+		internal.Run(listArray, &User)
 	}
 }
