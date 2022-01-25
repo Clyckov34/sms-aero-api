@@ -19,12 +19,12 @@ func init() {
 	Отправка SMS по телефону
 */
 func main() {
-	listArray := []int{79963567212, 79996299940, 79996256594, 79610857087, 79963568358}
+	listPhone := []int{79963567212, 79996299940, 79996256594, 79610857087, 79963568358}
 
 	if len(os.Args) == 1 {
 		log.Fatalln("ошибка: Не указаны флаги")
 	} else {
 		flag.Parse()
-		internal.Run(listArray, &User)
+		internal.Run(listPhone, &User)
 	}
 }
