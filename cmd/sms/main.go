@@ -1,17 +1,17 @@
 package main
 
 import (
-	"WWW/internal"
 	"flag"
 	"log"
+	"mysmsproject/internal"
 	"os"
 )
 
-var User internal.User
+var user internal.User
 
 func init() {
-	flag.StringVar(&User.Email, "user", "", "Email от учетной записи https://smsaero.ru")
-	flag.StringVar(&User.Token, "token", "", "Token от учетной записи https://smsaero.ru/cabinet/settings/apikey/")
+	flag.StringVar(&user.Email, "user", "", "Email от учетной записи https://smsaero.ru")
+	flag.StringVar(&user.Token, "token", "", "Token от учетной записи https://smsaero.ru/cabinet/settings/apikey/")
 }
 
 /*
@@ -25,6 +25,6 @@ func main() {
 		log.Fatalln("ошибка: Не указаны флаги")
 	} else {
 		flag.Parse()
-		internal.Run(listPhone, &User)
+		internal.SMSRun(listPhone, &user)
 	}
 }

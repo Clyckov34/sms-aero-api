@@ -9,7 +9,7 @@ import (
 //Run запуск приложения SMS Aero
 //	dictPhone - словарь Образец map[НОМЕР]=ИМЯ
 //	user - данные пользователя по struct USER
-func Run(listPhone []int, user *User) {
+func SMSRun(listPhone []int, user *User) {
 	var SMS = &WaitGroup{
 		Account: User{
 			Email: user.Email,  // Логин учетной записи

@@ -1,3 +1,3 @@
-module WWW
+module mysmsproject
 
 go 1.17
