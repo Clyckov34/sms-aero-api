@@ -11,8 +11,6 @@ import (
 //	phone - Номер телефона
 //	message - Текст сообщения
 func (m *WaitGroup) request(phone, message string) {
-	defer m.Wg.Done()
-
 	value := url.Values{
 		"number": {phone},
 		"text":   {message},
@@ -23,7 +21,15 @@ func (m *WaitGroup) request(phone, message string) {
 	if err != nil || req.StatusCode != 200 {
 		log.Fatalln("ошибка запроса:", req.Status)
 	}
-	defer req.Body.Close()
+
+	defer func() {
+		err := req.Body.Close()
+		if err != nil {
+			log.Println(err)
+		}
+
+		m.Wg.Done()
+	}()
 
 	status(req.Status)
 }
