@@ -8,6 +8,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o app cmd/sms/main.go
 
 FROM alpine:latest
 RUN apk --no-cache add ca-certificates
-WORKDIR /root/
+WORKDIR /root
+ENV RU UTC
 COPY --from=bilder /app .
 CMD ["./app"]
